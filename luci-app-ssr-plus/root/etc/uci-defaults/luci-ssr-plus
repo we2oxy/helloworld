@@ -12,6 +12,17 @@ uci -q batch <<-EOF >/dev/null
 	set firewall.shadowsocksr.path=/var/etc/shadowsocksr.include
 	set firewall.shadowsocksr.reload=1
 	commit firewall
+
+	set shadowsocksr.@global[0].run_mode='router'
+	set shadowsocksr.@global[0].pdnsd_enable='2'
+	set shadowsocksr.@global[0].enable_switch='0'
+	set shadowsocksr.@global[0].gfwlist_url='https://cdn.jsdelivr.net/gh/Loyalsoldier/v2ray-rules-dat@release/gfw.txt'
+	set shadowsocksr.@global[0].chnroute_url='https://gh.404delivr.workers.dev/https://github.com/QiuSimons/Chnroute/raw/master/dist/chnroute/chnroute.txt'
+	set shadowsocksr.@server_subscribe[0].switch='0'
+	set shadowsocksr.@server_subscribe[0].proxy='0'
+	set shadowsocksr.@global[0].tunnel_forward='8.8.8.8:53'
+	set shadowsocksr.@server_subscribe[0].auto_update_time='12'
+	commit shadowsocksr
 EOF
 
 rm -rf /etc/config/shadowsocksr-opkg /etc/ssrplus/*opkg
